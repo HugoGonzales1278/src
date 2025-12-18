@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Detona Ralph</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- fontes de estilos de letras -->
+<link rel="stylesheet" href=".style/reset.css">
+<link rel="stylesheet" href=".style/main.css">
+<!-- fontes de estilos de letras do google fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Passion+One:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <h1>🎮 DETONA RALPH 🎮</h1>
+
+    <div class="container">
+        <div class="menu">
+            <div class="menu-time">
+                <h2>Time Left</h2>
+                <h2 id="time-left">60</h2>
+            </div>
+            <div class="menu-score">
+                <h2>Your Score</h2>
+                <h2 id="score">0</h2>
+            </div>
+            <div class="menu-lives">
+                <span>❤️</span>
+                <h2 id="lives">x3</h2>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-row">
+                <div class="square" id="1"></div>
+                <div class="square" id="2"></div>
+                <div class="square" id="3"></div>
+            </div>
+            <div class="panel-row">
+                <div class="square" id="4"></div>
+                <div class="square" id="5"></div>
+                <div class="square" id="6"></div>
+            </div>
+            <div class="panel-row">
+                <div class="square" id="7"></div>
+                <div class="square" id="8"></div>
+                <div class="square" id="9"></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="restart-btn" id="restart-btn">🔄 RESTART</button>
+
+    <div class="game-over" id="game-over">
+        <h2>GAME OVER!</h2>
+        <p id="final-score">Sua pontuação: 0</p>
+        <button class="restart-btn show" onclick="restartGame()">🔄 JOGAR NOVAMENTE</button>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="hit-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE=" type="audio/wav">
+    </audio>
+    <script src="./scripts/engine.js"></script>
+</body>
+</html>

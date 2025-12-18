@@ -1,0 +1,347 @@
+@charset "UTF-8";
+
+
+/* Reset 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*/
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Título */
+h1 {
+    color: #ff6b6b;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 4px 4px 0px #000, 8px 8px 0px rgba(255, 107, 107, 0.3);
+    animation: titleBounce 2s ease-in-out infinite;
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Container Principal */
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 5px solid #ff6b6b;
+}
+
+/* Menu de Informações */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.menu > div {
+    background: rgba(255, 107, 107, 0.2);
+    padding: 15px 25px;
+    border-radius: 10px;
+    text-align: center;
+    border: 3px solid #ff6b6b;
+    min-width: 150px;
+}
+
+.menu h2 {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.menu-time h2:first-child,
+.menu-score h2:first-child {
+    color: #ffd93d;
+}
+
+.menu #time-left,
+.menu #score {
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.menu-lives {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+/* Painel do Jogo */
+.panel {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><pattern id="brick" x="0" y="0" width="80" height="40" patternUnits="userSpaceOnUse"><rect width="80" height="40" fill="%23a0522d"/><rect width="38" height="18" x="1" y="1" fill="%23c87533"/><rect width="38" height="18" x="41" y="1" fill="%23b8652d"/><rect width="38" height="18" x="1" y="21" fill="%23b8652d"/><rect width="38" height="18" x="41" y="21" fill="%23c87533"/><path d="M0,0 L80,0 L80,40 L0,40 Z" fill="none" stroke="%23000" stroke-width="1"/><path d="M40,0 L40,40 M0,20 L80,20" stroke="%23000" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="400" height="400" fill="url(%23brick)"/></svg>') center/cover;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 5px solid #8b4513;
+}
+
+.panel-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.panel-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Quadrados do Jogo */
+.square {
+    width: 150px;
+    height: 150px;
+    background: rgba(139, 69, 19, 0.6);
+    border: 4px solid #654321;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-image: url('../imagens/ralph.png') center/cover;
+
+}
+
+.square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+
+}
+
+.square:active {
+    transform: scale(0.95);
+
+}
+
+/* Ralph aparecendo */
+.square.enemy {
+    background: url('/src/imagens/detona-ralph.png') center/cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: ralphAppear 0.3s ease-out;
+    border-color: #ff6b6b;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+}
+
+@keyframes ralphAppear {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Efeito de Hit */
+.square.hit {
+    animation: hitEffect 0.3s ease-out;
+    radial-gradient:(circle, #bf00ff 0%, #e40909 50%, #0e4ee1 100%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 1),
+                0 0 60px rgb(246, 254, 7),
+                inset 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes hitEffect {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1) saturate(1);
+    }
+    20% {
+        transform: scale(1.4) rotate(15deg);
+        filter: brightness(2) saturate(1.5);
+    }
+    40% {
+        transform: scale(0.8) rotate(-15deg);
+        filter: brightness(2.5) saturate(2);
+    }
+    60% {
+        transform: scale(1.2) rotate(10deg);
+        filter: brightness(2) saturate(1.5);
+    }
+    80% {
+        transform: scale(0.9) rotate(-5deg);
+        filter: brightness(1.5) saturate(1.2);
+    }
+}
+
+/* Partículas de explosão ao acertar */
+@keyframes particle {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, #ffd700, #ff6b6b);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle 0.8s ease-out forwards;
+    box-shadow: 0 0 10px #ffd700;
+}
+
+/* Estrelas ao acertar */
+@keyframes starBurst {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.star {
+    position: absolute;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: starBurst 0.8s ease-out forwards;
+
+}
+
+/* Botão de Restart */
+.restart-btn {
+    display: none;
+    margin: 20px auto;
+    padding: 15px 40px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+}
+
+.restart-btn.show {
+    display: block;
+}
+
+/* Game Over */
+.game-over {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    padding: 50px;
+    border-radius: 20px;
+    border: 5px solid #ff6b6b;
+    text-align: center;
+    z-index: 1000;
+}
+
+.game-over.show {
+    display: block;
+    animation: gameOverAppear 0.5s ease-out;
+}
+
+@keyframes gameOverAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.game-over h2 {
+    color: #ff6b6b;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.game-over p {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .square {
+        width: 100px;
+        height: 100px;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .menu > div {
+        min-width: 120px;
+        padding: 10px 15px;
+    }
+
+    .menu #time-left,
+    .menu #score {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .square {
+        width: 80px;
+        height: 80px;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
